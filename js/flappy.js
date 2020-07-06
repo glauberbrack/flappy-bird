@@ -17,10 +17,6 @@ function Barrier(reverse = false){
     this.setHeight = height => body.style.height = `${height}px`
 }
 
-// const b = new Barrier(true)
-// b.setHeight(200)
-// document.querySelector('[tp-flappy]').appendChild(b.element)
-
 function DoubleBarriers(height, openspace, position){
     this.element = newElement('div', 'double-barriers')
 
@@ -29,5 +25,26 @@ function DoubleBarriers(height, openspace, position){
 
     this.element.appendChild(this.higher.element)
     this.element.appendChild(this.bottom.element)
+
+    this.randomOpenScace = () => {
+        const higherHeight = Math.random() * (height - openspace)
+        const bottomHeight = height - openspace - higherHeight
+
+        this.higher.setHeight(higherHeight)
+        this.bottom.setHeight(bottomHeight)
+    }
+
+    this.getX = () => parent(this.element.style.left.split('px'))
+
+    this.setX = position => this.element.style.left = `${position}px`
+
+    this.getWidth = () => this.element.clientWidth
+
+    this.randomOpenScace()
+    this.setX(position)
 }
+
+
+// const b = new DoubleBarriers(700, 200,800)
+// document.querySelector('[tp-flappy]').appendChild(b.element)
 
